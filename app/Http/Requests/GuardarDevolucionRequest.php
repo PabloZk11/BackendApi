@@ -22,10 +22,9 @@ class GuardarDevolucionRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'nom_producto' => 'required',
-        'unidades' => 'required',
-        'detalle' => 'required',
-        'id_entrada_devolvuion' => 'required'
-        ];
+            'id_producto' => 'required',
+            'unidades' => 'required',
+            'id_entrada_devolvuion' => 'required'
+            ];
     }
 }

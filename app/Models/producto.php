@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\producto;
 
 class producto extends Model
 {
@@ -14,14 +13,15 @@ class producto extends Model
     protected $table = 'productos';
 
     protected $fillable = [
-        "id_categoria_producto",
         "nom_producto",
-        "precio",
-        "unidades",
-        "detalles_descripcion"
+        "precio_unitario",
+        "unidades_disponibles",
+        "marca",
+        "proveedor_id_proveedor",
+        "categoria_producto"
     ];
-    
+
 
     public $timestamps = false;
-    
+
 }

@@ -13,10 +13,10 @@ class registro_salida extends Model
 
 
     protected $fillable = [
-        "id_salida",
-        "id_producto_salida",
         "unidades",
-        "id_factura_salidas"
+        "id_producto_salida",
+        "id_factura_salida",
+        "id_producto"
     ];
 
     public $timestamps = false;

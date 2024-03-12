@@ -31,9 +31,9 @@ class re_salidaController extends Controller
     {
         try{
             $registro_salida = registro_salida::create([
-                "id_producto_salida" => $request -> id_producto_salida,
                 "unidades" => $request -> unidades,
-                "id_factura_salidas" => $request -> id_factura_salidas
+                "id_factura_salida" => $request -> id_factura_salida,
+                "id_producto" => $request -> id_producto,
             ]);
             return apiResponses::success('salida guardada exitosamente',201, $registro_salida);
             }catch (ValidationException $e) {

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+
 use Exception;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Controller;
@@ -34,11 +35,12 @@ class productoController extends Controller
     {
         try{
             $producto = producto::create([
-                "id_categoria_producto" => $request -> id_categoria_producto,
                 "nom_producto" => $request -> nom_producto,
-                "precio" => $request -> precio,
-                "unidades" => $request -> unidades,
-                "detalles_descripcion" => $request -> detalles_descripcion
+                "precio_unitario" => $request -> precio_unitario,
+                "unidades_disponibles" => $request -> unidades_disponibles,
+                "marca" => $request -> marca,
+                "proveedor_id_proveedor" => $request -> proveedor_id_proveedor,
+                "categoria_producto" => $request -> categoria_producto
             ]);
             return apiResponses::success('producto guardado exitosamente',201, $producto);
             }catch (ValidationException $e) {
@@ -52,7 +54,7 @@ class productoController extends Controller
     public function show($id_producto)
     {
         try{
-            $producto = producto::findOrFail($id_producto);  
+            $producto = producto::findOrFail($id_producto);
             return apiResponses::success('producto retornado exitosamente: ',200, $producto);
         }catch(ModelNotFoundException $e){
             return apiResponses::error('Fallo al buscar el pedido ',404);
@@ -64,7 +66,7 @@ class productoController extends Controller
      */
     public function update(updProductosRequest $request, producto $producto)
     {
-        try{                  
+        try{
 
             $producto->update($request->all());
                 return apiResponses::success('Producto actualizada correctamente',200,$producto);

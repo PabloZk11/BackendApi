@@ -14,9 +14,8 @@ class devolucion extends Model
     protected $primaryKey = 'id_devolucion';
 
     protected $fillable = [
-      'nom_producto',
+      'id_producto',
       'unidades',
-      'detalle',
       'id_entrada_devolvucion'  
     ];
 

@@ -4,15 +4,14 @@ namespace App\Http\Controllers\API;
 
 use Exception;
 use App\Http\Responses\apiResponses;
-//use App\Http\Requests\GuardarPedidoRequest;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GuardarPedidoRequest;
-use App\Models\pedido;
+use App\Http\Requests\RegistrarEntradaRequest;
+use App\Models\entrada_mercancia;
 use Illuminate\Http\Request;
 
-class pedidoController extends Controller
+class entradaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,10 +21,10 @@ class pedidoController extends Controller
     public function index()
     {
         try{
-            $pedidos = pedido::all();
-            return  apiResponses::success('Listado de pedidos',205,$pedidos);
+            $entrada = entrada_mercancia::all();
+            return  apiResponses::success('Listado de entradas: ',205,$entrada);
         } catch(Exception $e){
-            return apiResponses::error('Algo salió mal al llamar los pedidos '.$e->getMessage(),500);
+            return apiResponses::error('Algo salió mal al retornar las entradas '.$e->getMessage(),500);
         }
     }
 
@@ -35,20 +34,18 @@ class pedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(GuardarPedidoRequest $request)
+    public function store(RegistrarEntradaRequest $request)
     {
        try{
-            $pedidos = pedido::create([
-                "precio"                => $request -> precio,
-                "unidades"              => $request -> unidades,
-                "detalles_descripcion"  => $request -> detalles_descripcion,
-                "nom_producto"          => $request -> nom_producto,
-                "id_admin_pedido"       => $request -> id_admin_pedido,
-                "id_proveedor_pedido"   => $request -> id_proveedor_pedido 
+            $entradas = entrada_mercancia::create([
+                "cantidad_unidades"                   => $request -> cantidad_unidades,
+                "id_producto"                => $request -> id_producto,
+                "id_pedido"                   => $request -> id_pedido,
+                "id_proveedor"               => $request -> id_proveedor
             ]);
-            return apiResponses::success('Pedido guardado exitosamente',201, $pedidos);
+            return apiResponses::success('Entrada registrada ',201, $entradas);
         }catch(ValidationException $e){
-            return apiResponses::error('Algo falló al intentar guardar el pedido ',422);
+            return apiResponses::error('Algo falló al registrar la entrada ',422);
         }
     }
 
@@ -58,13 +55,13 @@ class pedidoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id_pedido)
+    public function show($id_entrada)
     {
         try{
-            $pedidos = pedido::findOrFail($id_pedido);  
-            return apiResponses::success('Pedido retornado exitosamente: ',200, $pedidos);
+            $entrada = entrada_mercancia::findOrFail($id_entrada);  
+            return apiResponses::success('Entrada retornada exitosamente: ',200, $entrada);
         }catch(ModelNotFoundException $e){
-            return apiResponses::error('Fallo al buscar el pedido ',404);
+            return apiResponses::error('Fallo al buscar la entrada ',404);
         }
     }
 

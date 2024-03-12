@@ -10,11 +10,14 @@ class factura_salida extends Model
     use HasFactory;
 
     protected $table = 'factura_salida';
-    protected $primaryKey = 'id_factura';
+    protected $primaryKey = 'Id_factura_salida';
 
     protected $fillable = [
-      'id_vendedor_factura',
-      'descripcion',
-      'fecha'  
+      'Cantidad',
+      'Precio_unitario',
+      'Precio_total',
+      'Fecha',
+      'id_producto',
+      'id_vendedor'  
     ];
 }

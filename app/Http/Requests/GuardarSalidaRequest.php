@@ -22,9 +22,9 @@ class GuardarSalidaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id_producto_salida" => "required",
             "unidades" => "required",
-            "id_factura_salidas" => "required"
+            "id_factura_salida" => "required",
+            "id_producto" => "required",
         ];
     }
 }

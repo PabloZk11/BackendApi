@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\GuardarFacturaRequest;
-use App\Http\Requests\facturaupdateRequest;
+use App\Http\Controllers\Controller\Exception;
+use App\Http\Requests\facturaUpdate;
+use App\Http\Resources\GuardarFacturaRequest;
 use App\Http\Responses\apiResponses;
 use App\Models\factura_salida;
 
@@ -30,10 +31,13 @@ class facturaController extends Controller
     public function store(Request $request)
     {
         try{
-            $devolucion = pedido::create([
-                "id_vendedor_factura" => $request -> id_vendedor_factura,
-                "descripcion" => $request -> descripcion,
+            $factura_salida = factura_salida::create([
+                "Cantidad" => $request -> Cantidad,
+                "Precio_unitario" => $request -> Precio_unitario,
                 "fecha" => $request -> fecha,
+                "id_producto"=> $request -> id_producto,
+                "id_vendedor"=> $request -> id_vendedor,
+
      
               
             ]);
@@ -46,20 +50,25 @@ class facturaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $Id_factura_salida)
     {
-        //
+        try{
+            $factura_salida = factura_salida::findOrFail($Id_factura_salida);  
+            return apiResponses::success('salida retornada exitosamente: ',200, $Id_factura_salida);
+        }catch(ModelNotFoundException $e){
+            return apiResponses::error('Fallo al buscar la salida ',404);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(facturaUpdate $request, factura_salida $id_factura)
+    public function update(facturaUpdate $request, factura_salida $Id_factura_salida)
     {
         try{                  
            
-            $id_factura->update($request->all());
-            return apiResponses::success('factura actualizada correctamente',200,$id_factura);
+            $Id_factura_salida->update($request->all());
+            return apiResponses::success('factura actualizada correctamente',200,$Id_factura_salida);
         }catch(ModelNotFoundException $e){
             return apiResponses::error('factura no encontrada',404);
         }catch (ValidationException $e) {
@@ -67,6 +76,12 @@ class facturaController extends Controller
         }catch(Exception $e){
             return apiResponses::error('Error: '.$e->getMessage(),422);
         }
+
+        $Id_factura_salida->update($request->all());
+        return response()->json([
+            "res" => true,
+            "mensaje" => "factura Actualizado"
+        ]);
     }
 
     /**

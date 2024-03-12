@@ -22,11 +22,11 @@ class updProductosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "id_categoria_producto" => "required",
-            "nom_producto" =>"required|unique:productos,nom_producto".$this->route("producto")->id, 
-            "precio" => "required",
-            "unidades" => "required",
-            "detalles_descripcion" => "required"
+            "nom_producto" =>"required|unique:productos,nom_producto".$this->route("producto")->id,
+            "precio_unitario" => "required",
+            "unidades_disponibles" => "required",
+            "proveedor_id_proveedor" => "required",  
+            "categoria_producto" => "required"
         ];
     }
 }

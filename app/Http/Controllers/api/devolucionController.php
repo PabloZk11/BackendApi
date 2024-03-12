@@ -32,14 +32,13 @@ class devolucionController extends Controller
     public function store(GuardarDevolucionRequest $request)
     {
         try{
-            $devolucion = pedido::create([
-                "nom_producto" => $request -> nom_producto,
+            $devolucion = devolucion::create([
+                "id_producto " => $request -> id_producto ,
                 "unidades" => $request -> unidades,
-                "detalle" => $request -> detalle,
-                "id_entrada_devolvuion"          => $request -> id_entrada_devolucion,
+                "id_entrada_devolvuion"  => $request -> id_entrada_devolucion,
               
             ]);
-            return apiResponses::success('devolucion guardada exitosamente',201, $pedidos);
+            return apiResponses::success('devolucion guardada exitosamente',201, $devolucion);
         }catch(ValidationException $e){
             return apiResponses::error('Algo falló al intentar guardar la devolucion ',422);
         }
@@ -48,7 +47,7 @@ class devolucionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id_devolucion)
     {
         try{
             $devolucion = devolucion::findOrFail($id_devolucion);  

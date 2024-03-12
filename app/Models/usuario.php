@@ -11,11 +11,11 @@ class usuario extends Model
     protected $table = 'usuario';
 
     protected $fillable = [
-        "id_tdoc_usuario",
         "nombre",
         "email",
         "contraseña",
-        "id_rol"
+        "rol_usuario",
+        "id_tdoc_usuario"
     ];
     
     public $timestamps = false;

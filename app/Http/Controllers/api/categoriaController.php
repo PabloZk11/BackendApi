@@ -7,12 +7,11 @@ use App\Http\Requests\GuardarCategoriaRequest;
 use App\Http\Requests\updateCategoriaRequest;
 use App\Http\Responses\apiResponses;
 use App\Models\categoria_productos;
-use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-//use Illuminate\Database\Eloquent\Collection::update;
-use Illuminate\Http\Request;
+
 
 class categoriaController extends Controller
 {
@@ -73,19 +72,16 @@ class categoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(updateCategoriaRequest $request,categoria_productos $id_categoria)
+    public function update(updateCategoriaRequest $request,  $id_categoria)
     {
         try{                  
-           /* $categorias = categoria_productos::findOrFail($id_categoria); 
+            $categoria = categoria_productos::findOrFail($id_categoria);
             $request->validate([
-               'nombre_categoria' => ['required', Rule::unique('categoria_productos')->ignore($categorias)],
-               'descripcion' => ['required', Rule::unique('categoria_productos')->ignore($categorias)]
+                'nombre_categoria' => ['required',Rule::unique('categoria_productos')->ignore($categoria)],
+                'descripcion' => ['required',Rule::unique('categoria_productos')->ignore($categoria)]
             ]);
-            $categorias->update($request->all());
-            return apiResponses::success('Categoría actualizada correctamente',200,$categorias);*/
-            //$categorias = categoria_productos::findOrFail($id_categoria); 
-            $id_categoria->update($request->all());
-            return apiResponses::success('Categoría actualizada correctamente',200,$id_categoria);
+            $categoria->update($request->all());
+            return apiResponses::success('Categoría actualizada correctamente',200,$categoria);
         }catch(ModelNotFoundException $e){
             return apiResponses::error('Categoria no encontrada',404);
         }catch (ValidationException $e) {

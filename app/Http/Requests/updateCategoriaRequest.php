@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GuardarFacturaRequest extends FormRequest
+class updateCategoriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,8 @@ class GuardarFacturaRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'Cantidad'=>'required',
-        'Precio_unitario'=> 'required',
-        'Precio_total'=> 'required',
-        'fecha'=> "required",
-        "id_producto"=> "required",
-        "id_vendedor"=> "required",
+            'nombre_categoria'=>"required|unique:categoria_productos,nombre_categoria",
+            'descripcion'=>"required|unique:categoria_productos,descripcion"
         ];
     }
 }

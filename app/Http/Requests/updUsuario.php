@@ -22,11 +22,11 @@ class updUsuario extends FormRequest
     public function rules(): array
     {
         return [
-            "id_tdoc_usuario" => "required",
             "nombre" => "required",
             "email" => "required",
             "contraseña" => "required",
-            "id_rol" => "required"
+            "id_rol" => "required",
+            "id_tdoc_usuario" => "required",
         ];
     }
 }

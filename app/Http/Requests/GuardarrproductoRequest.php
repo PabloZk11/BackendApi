@@ -21,13 +21,13 @@ class guardarrproductoRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            "id_categoria_producto" => "required",
-            "nom_producto" =>"required|unique:productos,nom_producto", 
-            "precio" => "required",
-            "unidades" => "required",
-            "detalles_descripcion" => "required"
-
+        return [ 
+            "nom_producto" =>"required|unique:productos,nom_producto",
+            "precio_unitario" => "required",
+            "unidades_disponibles" => "required",
+            "marca" => "required",
+            "proveedor_id_proveedor" => "required",
+            "categoria_producto" => "required"
         ];
     }
 }

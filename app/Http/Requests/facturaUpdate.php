@@ -22,9 +22,12 @@ class facturaUpdate extends FormRequest
     public function rules(): array
     {
         return [
-        'id_vendedor_factura',
-        'descripcion'=> "required",
-        'fecha'=> "required"
-        ];
+            'Cantidad'=>'required',
+            'Precio_unitario'=> 'required',
+            'Precio_total'=> 'required',
+            'fecha'=> "required",
+            "id_producto"=> "required",
+            "id_vendedor"=> "required",
+            ];
     }
 }

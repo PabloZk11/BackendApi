@@ -1,4 +1,4 @@
-<?php
+c:\xampp\htdocs\api\app\Http\Requests\facturaUpdate.php<?php
 
 namespace App\Http\Requests;
 
@@ -22,9 +22,8 @@ class ActualizarDevolucionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nom_producto' => 'required',
+            'id_producto' => 'required',
             'unidades' => 'required',
-            'detalle' => 'required',
             'id_entrada_devolvuion' => 'required'
             ];
         }

@@ -1,10 +1,10 @@
-<?php
+c:\xampp\htdocs\api\app\Http\Requests\postVendedor.php<?php
 
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GuardarFacturaRequest extends FormRequest
+class postUsuario extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,11 @@ class GuardarFacturaRequest extends FormRequest
     public function rules(): array
     {
         return [
-        'Cantidad'=>'required',
-        'Precio_unitario'=> 'required',
-        'Precio_total'=> 'required',
-        'fecha'=> "required",
-        "id_producto"=> "required",
-        "id_vendedor"=> "required",
+            "nombre" => "required",
+            "email" => "required",
+            "contraseña" => "required",
+            "rol_usuario" => "required",
+            "id_tdoc_usuario" => "required",
         ];
     }
 }
